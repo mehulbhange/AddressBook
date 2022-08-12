@@ -29,19 +29,20 @@ public class AddressBookMain {
         String email = sc.next();
 
         addressBook.createContact(firstName,lastName,street,city,state,zip,phoneNo,email);
+
     }
 
     public void editContact(String name){
         for(Contact contact : addressBook.contacts){
             if(contact.getFirstName().equals(name) || contact.getLastName().equals(name)){
                 System.out.println("What you want to edit : \n" +
-                        "1.first name\t" +
-                        "2.last name\t" +
-                        "3.street\t" +
-                        "4.city\t" +
-                        "5.state\t" +
-                        "6.zip\t" +
-                        "7.contact number\t" +
+                        "1.first name \t" +
+                        "2.last name \t" +
+                        "3.street \t" +
+                        "4.city \t" +
+                        "5.state \t" +
+                        "6.zip \t" +
+                        "7.contact number \t" +
                         "8.email");
                 int ch = sc.nextInt();
                 switch (ch){
@@ -93,12 +94,49 @@ public class AddressBookMain {
         }
         System.out.println(name + " not found!");
     }
+    public void deleteContact(String name){
+        for(Contact contact : addressBook.contacts){
+            if(contact.getFirstName().equals(name) || contact.getLastName().equals(name)){
+                addressBook.contacts.remove(contact);
+                return;
+            }
+        }
+        System.out.println(name + " not found!");
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
 
         AddressBookMain addressBookMain = new AddressBookMain();
-        addressBookMain.addContact();
-        
+
+        Scanner scan = new Scanner(System.in);
+
+        while (true){
+            System.out.println("1.Add contact \t " +
+                    "2.Edit existing contact \t" +
+                    "3.Delete contact \t" +
+                    "0.Exit");
+            int ch = scan.nextInt();
+            switch (ch){
+                case 0:
+                    System.exit(0);
+                    break;
+                case 1:
+                    addressBookMain.addContact();
+                    break;
+                case 2:
+                    System.out.println("Enter person name");
+                    String name = scan.next();
+                    addressBookMain.editContact(name);
+                    break;
+                case 3:
+                    System.out.println("Enter person name");
+                    String name1 = scan.next();
+                    addressBookMain.deleteContact(name1);
+                    break;
+                default:
+                    System.out.println("Invalid input.");
+            }
+        }
 
     }
 }
