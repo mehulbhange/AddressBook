@@ -1,5 +1,9 @@
 package com.bridgelabz;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class AddressBookMain {
@@ -8,12 +12,15 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book Program");
         Scanner sc = new Scanner(System.in);
         //AddressBook addressBook = new AddressBook();
+        String filePath = "E:\\BridgeLabz Fellowship\\IntelliJ\\AddressBookMain\\src\\";
 
         HashMap<String, AddressBook> addressBookHashMap = new HashMap<>();
 
         while (true){
             System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books");
+                    "\n6.Display available address books \n7.Display all address books" +
+                    "\n8.Write addressbook to file" +
+                    "\n9.Read addressbook from file");
             int ch = sc.nextInt();
             switch (ch){
                 case 0:
@@ -88,6 +95,36 @@ public class AddressBookMain {
                         System.out.println(entry.getKey());
                         AddressBook addBook = (AddressBook) entry.getValue();
                         addBook.displayContact();
+                    }
+                    break;
+                case 8:
+                    Set<Map.Entry<String, AddressBook>> addressBook1 = addressBookHashMap.entrySet();
+                    for (Map.Entry entry :  addressBook1){
+                        try {
+                            FileOutputStream fos = new FileOutputStream(filePath+entry.getKey()+".txt");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            AddressBook adBook = (AddressBook) entry.getValue();
+                            List<Contact> contacts = adBook.getContactList();
+                            oos.writeObject(contacts);
+                            oos.close();
+                        }catch (Exception exception){
+                            System.out.println(exception);
+                        }
+                    }
+                    break;
+                case 9:
+                    System.out.println("Enter address book name :");
+                    String file = sc.next();
+                    try{
+                        FileInputStream fis = new FileInputStream(filePath+file+".txt");
+                        ObjectInputStream ois = new ObjectInputStream(fis);
+                        List<Contact> contacts = (List<Contact>) ois.readObject();
+                        ois.close();
+                        for (Contact contact : contacts){
+                            System.out.println(contact);
+                        }
+                    }catch (Exception exception){
+                        System.out.println(exception);
                     }
                     break;
                 default:

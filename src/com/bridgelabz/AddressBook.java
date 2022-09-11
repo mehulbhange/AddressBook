@@ -1,9 +1,11 @@
 package com.bridgelabz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-class AddressBook {
+class AddressBook{
 
     private ArrayList<Contact> contacts = new ArrayList<>();
 
@@ -111,6 +113,9 @@ class AddressBook {
             }
         }
         System.out.println(name + " not found!");
+    }
+    public List<Contact> getContactList(){
+        return contacts;
     }
 
 }
