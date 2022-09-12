@@ -127,12 +127,8 @@ class AddressBook{
     * if duplicate return true else return false
     * */
     public boolean isDuplicate(String firstName, String lastName){
-        for (Contact contact : contacts ){
-            if (contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)){
-                return true;
-            }
-        }
-        return false;
+        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
+        return result;
     }
 
 }
