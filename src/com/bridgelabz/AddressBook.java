@@ -1,16 +1,14 @@
 package com.bridgelabz;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class AddressBook{
 
     private ArrayList<Contact> contacts = new ArrayList<>();
-    private HashMap<String, List<Contact>> cityContactList = new HashMap<>();
-    private HashMap<String, List<Contact>> stateContactList = new HashMap<>();
+    private static HashMap<String, List<Contact>> cityContactList = new HashMap<>();
+    private static HashMap<String, List<Contact>> stateContactList = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
     public void addContact(){
@@ -158,24 +156,36 @@ class AddressBook{
         });
     }
 
-    public void viewPersonsByCity(String city){
+
+    public static void viewPersonsByCity(String city){
         if (cityContactList.containsKey(city)){
             List<Contact> tempList = cityContactList.get(city);
             tempList.stream().forEach(contact -> System.out.println(contact));
         }
+
     }
-    public void viewPersonsByState(String state){
+    public static void viewPersonsByState(String state){
         if (stateContactList.containsKey(state)){
             List<Contact> tempList = stateContactList.get(state);
             tempList.stream().forEach(contact -> System.out.println(contact));
         }
     }
 
-    public int getContactCountByCity(){
-        return cityContactList.size();
+    // method to get number of contact persons by city
+    public static int getCountByCity(String city) {
+        if (cityContactList.containsKey(city)){
+            return cityContactList.get(city).size();
+        }
+        return 0;
     }
-    public int getContactCountByState(){
-        return stateContactList.size();
+    // method to get number of contact persons by state
+    public static int getCountByState(String state) {
+        if (stateContactList.containsKey(state)){
+            return stateContactList.get(state).size();
+        }
+        return 0;
     }
+
+
 }
 

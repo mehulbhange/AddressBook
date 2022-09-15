@@ -147,21 +147,18 @@ public class AddressBookMain {
                         case 1:
                             System.out.println("Enter city :");
                             String city = sc.next();
-                            for (Map.Entry entry :  addressBook3){
-                                AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.viewPersonsByCity(city);
-                            }
+                            AddressBook.viewPersonsByCity(city);
+                            System.out.println(AddressBook.getCountByCity(city)+ " contacts found for "+city+" city.");
                             break;
                         case 2:
                             System.out.println("Enter state :");
                             String state = sc.next();
-                            for (Map.Entry entry :  addressBook3){
-                                AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.viewPersonsByState(state);
-                            }
+                            AddressBook.viewPersonsByState(state);
+                            System.out.println(AddressBook.getCountByState(state)+ " contacts found for "+state+" state.");
                             break;
                     }
                     break;
+                
                 default:
                     System.out.println("Invalid Input");
             }
