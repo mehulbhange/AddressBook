@@ -19,7 +19,8 @@ public class AddressBookMain {
                     "\n8.Write addressbook to file" +
                     "\n9.Read addressbook from file" +
                     "\n10.Search by city or state " +
-                    "\n11.View Person by city or state");
+                    "\n11.View Person by city or state" +
+                    "\12.Get person count by city ");
             int ch = sc.nextInt();
             switch (ch){
                 case 0:
@@ -142,23 +143,23 @@ public class AddressBookMain {
                 case 11:
                     System.out.println("1. View by city 2.View by state");
                     int in = sc.nextInt();
-                    Set<Map.Entry<String, AddressBook>> addressBook3 = addressBookHashMap.entrySet();
                     switch (in){
                         case 1:
                             System.out.println("Enter city :");
                             String city = sc.next();
-                            AddressBook.viewPersonsByCity(city);
-                            System.out.println(AddressBook.getCountByCity(city)+ " contacts found for "+city+" city.");
+                            AddressBook.viewContactByCity(addressBookHashMap,city);
                             break;
                         case 2:
                             System.out.println("Enter state :");
                             String state = sc.next();
-                            AddressBook.viewPersonsByState(state);
-                            System.out.println(AddressBook.getCountByState(state)+ " contacts found for "+state+" state.");
+                            AddressBook.viewContactByState(addressBookHashMap, state);
                             break;
                     }
                     break;
-                
+                case 12:
+                    System.out.println("Enter city name");
+                    AddressBook.getCountByCity(addressBookHashMap,sc.next());
+                    break;
                 default:
                     System.out.println("Invalid Input");
             }

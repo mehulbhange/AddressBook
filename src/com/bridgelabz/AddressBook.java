@@ -157,33 +157,28 @@ class AddressBook{
     }
 
 
-    public static void viewPersonsByCity(String city){
-        if (cityContactList.containsKey(city)){
-            List<Contact> tempList = cityContactList.get(city);
-            tempList.stream().forEach(contact -> System.out.println(contact));
+    // method to view person by city
+    public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            //list = entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+            entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
         }
 
     }
-    public static void viewPersonsByState(String state){
-        if (stateContactList.containsKey(state)){
-            List<Contact> tempList = stateContactList.get(state);
-            tempList.stream().forEach(contact -> System.out.println(contact));
+    public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
         }
     }
 
     // method to get number of contact persons by city
-    public static int getCountByCity(String city) {
-        if (cityContactList.containsKey(city)){
-            return cityContactList.get(city).size();
+    public static void  getCountByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
+        long count = 0;
+        for(Map.Entry<String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            long cnt = entries.getValue().getContactList().stream().filter(p -> p.getCity().equals(city)).count();
+            count += cnt;
         }
-        return 0;
-    }
-    // method to get number of contact persons by state
-    public static int getCountByState(String state) {
-        if (stateContactList.containsKey(state)){
-            return stateContactList.get(state).size();
-        }
-        return 0;
+        System.out.println(count + " Contacts in " + city);
     }
 
 
