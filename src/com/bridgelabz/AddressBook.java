@@ -170,5 +170,12 @@ class AddressBook{
             tempList.stream().forEach(contact -> System.out.println(contact));
         }
     }
+
+    public int getContactCountByCity(){
+        return cityContactList.size();
+    }
+    public int getContactCountByState(){
+        return stateContactList.size();
+    }
 }
 
