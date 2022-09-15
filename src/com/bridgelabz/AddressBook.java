@@ -2,13 +2,15 @@ package com.bridgelabz;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 class AddressBook{
 
     private ArrayList<Contact> contacts = new ArrayList<>();
-
+    private HashMap<String, List<Contact>> cityContactList = new HashMap<>();
+    private HashMap<String, List<Contact>> stateContactList = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
     public void addContact(){
@@ -29,9 +31,27 @@ class AddressBook{
 
         if (isDuplicate(firstName, lastName))
             System.out.println(firstName+" "+ lastName+" already exists in contacts");
-        else
-            contacts.add(new Contact(firstName,lastName,street,city,state,zip,phoneNo,email));
+        else {
+            Contact contact = new Contact(firstName, lastName, street, city, state, zip, phoneNo, email);
+            contacts.add(contact);
+            if (cityContactList.containsKey(city)){
+                List<Contact> tempList = cityContactList.get(city);
+                tempList.add(contact);
+            }else {
+                List<Contact> tempList = new ArrayList<>();
+                tempList.add(contact);
+                cityContactList.put(city,tempList);
+            }
+            if (stateContactList.containsKey(state)){
+                List<Contact> tempList = stateContactList.get(state);
+                tempList.add(contact);
+            }else {
+                List<Contact> tempList = new ArrayList<>();
+                tempList.add(contact);
+                stateContactList.put(city,tempList);
+            }
 
+        }
     }
 
     public void displayContact(){
@@ -138,5 +158,17 @@ class AddressBook{
         });
     }
 
+    public void viewPersonsByCity(String city){
+        if (cityContactList.containsKey(city)){
+            List<Contact> tempList = cityContactList.get(city);
+            tempList.stream().forEach(contact -> System.out.println(contact));
+        }
+    }
+    public void viewPersonsByState(String state){
+        if (stateContactList.containsKey(state)){
+            List<Contact> tempList = stateContactList.get(state);
+            tempList.stream().forEach(contact -> System.out.println(contact));
+        }
+    }
 }
 
