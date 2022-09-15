@@ -181,6 +181,16 @@ class AddressBook{
         System.out.println(count + " Contacts in " + city);
     }
 
+    // method to sort the entries alphabetically by person's Name
+    public static void sortByName(HashMap<String, AddressBook> addressBookHashMap) {
+        List<Contact> list = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            list = new ArrayList<>(entries.getValue().getContactList());
+        }
+        list.stream().sorted((p1, p2) -> ((String)p1.getFirstName()).compareTo(p2.getFirstName()))
+                .forEach(contact -> System.out.println(contact));
+    }
+
 
 }
 
