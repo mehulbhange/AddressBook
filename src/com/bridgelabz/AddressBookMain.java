@@ -142,23 +142,16 @@ public class AddressBookMain {
                 case 11:
                     System.out.println("1. View by city 2.View by state");
                     int in = sc.nextInt();
-                    Set<Map.Entry<String, AddressBook>> addressBook3 = addressBookHashMap.entrySet();
                     switch (in){
                         case 1:
                             System.out.println("Enter city :");
                             String city = sc.next();
-                            for (Map.Entry entry :  addressBook3){
-                                AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.viewPersonsByCity(city);
-                            }
+                            AddressBook.viewContactByCity(addressBookHashMap,city);
                             break;
                         case 2:
                             System.out.println("Enter state :");
                             String state = sc.next();
-                            for (Map.Entry entry :  addressBook3){
-                                AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.viewPersonsByState(state);
-                            }
+                            AddressBook.viewContactByState(addressBookHashMap, state);
                             break;
                     }
                     break;

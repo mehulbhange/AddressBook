@@ -1,10 +1,8 @@
 package com.bridgelabz;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class AddressBook{
 
@@ -158,16 +156,17 @@ class AddressBook{
         });
     }
 
-    public void viewPersonsByCity(String city){
-        if (cityContactList.containsKey(city)){
-            List<Contact> tempList = cityContactList.get(city);
-            tempList.stream().forEach(contact -> System.out.println(contact));
+    // method to view person by city
+    public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            //list = entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+            entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
         }
+
     }
-    public void viewPersonsByState(String state){
-        if (stateContactList.containsKey(state)){
-            List<Contact> tempList = stateContactList.get(state);
-            tempList.stream().forEach(contact -> System.out.println(contact));
+    public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
         }
     }
 }
