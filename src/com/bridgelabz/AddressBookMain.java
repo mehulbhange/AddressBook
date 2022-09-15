@@ -149,7 +149,7 @@ public class AddressBookMain {
                             String city = sc.next();
                             for (Map.Entry entry :  addressBook3){
                                 AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.searchByCityOrState(city);
+                                addBook.viewPersonsByCity(city);
                             }
                             break;
                         case 2:
@@ -157,7 +157,7 @@ public class AddressBookMain {
                             String state = sc.next();
                             for (Map.Entry entry :  addressBook3){
                                 AddressBook addBook = (AddressBook) entry.getValue();
-                                addBook.searchByCityOrState(state);
+                                addBook.viewPersonsByState(state);
                             }
                             break;
                     }

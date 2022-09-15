@@ -48,7 +48,7 @@ class AddressBook{
             }else {
                 List<Contact> tempList = new ArrayList<>();
                 tempList.add(contact);
-                stateContactList.put(city,tempList);
+                stateContactList.put(state,tempList);
             }
 
         }
