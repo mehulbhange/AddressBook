@@ -21,7 +21,7 @@ public class AddressBookMain {
                     "\n10.Search by city or state " +
                     "\n11.View Person by city or state" +
                     "\n12.Get person count by city " +
-                    "\n13.sort contacts by name");
+                    "\n13.sort contacts by name / City / State");
             int ch = sc.nextInt();
             switch (ch){
                 case 0:
@@ -162,7 +162,19 @@ public class AddressBookMain {
                     AddressBook.getCountByCity(addressBookHashMap,sc.next());
                     break;
                 case 13:
-                    AddressBook.sortByName(addressBookHashMap);
+                    System.out.println("1.sort by name \t2.sort by City \t3.sort by State");
+                    int sort = sc.nextInt();
+                    switch (sort){
+                        case 1:
+                            AddressBook.sortByName(addressBookHashMap);
+                            break;
+                        case 2:
+                            AddressBook.sortByCity(addressBookHashMap);
+                            break;
+                        case 3:
+                            AddressBook.sortByState(addressBookHashMap);
+                            break;
+                    }
                     break;
                 default:
                     System.out.println("Invalid Input");

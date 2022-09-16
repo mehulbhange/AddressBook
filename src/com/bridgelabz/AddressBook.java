@@ -191,6 +191,24 @@ class AddressBook{
                 .forEach(contact -> System.out.println(contact));
     }
 
+    //method to sort entries by city
+    public static void sortByCity(HashMap<String, AddressBook> addressBookHashMap){
+        List<Contact> list = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            list = entries.getValue().getContactList().stream().collect(Collectors.toList());
+        }
+        list.stream().sorted((p1 , p2) -> ((String)p1.getCity()).compareTo(p2.getCity()))
+                .forEach(contact -> System.out.println(contact));
+    }
+    //method to sort entries by state
+    public static void sortByState(HashMap<String, AddressBook> addressBookHashMap){
+        List<Contact> list = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            list = entries.getValue().getContactList().stream().collect(Collectors.toList());
+        }
+        list.stream().sorted((p1 , p2) -> ((String)p1.getState()).compareTo(p2.getState()))
+                .forEach(contact -> System.out.println(contact));
+    }
 
 }
 
